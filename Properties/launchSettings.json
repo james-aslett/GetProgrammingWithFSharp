@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "GetProgrammingWithFSharp": {
+      "commandName": "Project",
+      "commandLineArgs": "HELLO WORLD"
+    }
+  }
+}
