@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\JamesA\\source\\repos\\GetProgrammingWithFSharp\\GetProgrammingWithFSharp.fsproj": {}
+    "C:\\Users\\JamesA\\Source\\Repos\\GetProgrammingWithFSharp\\GetProgrammingWithFSharp.fsproj": {}
   },
   "projects": {
-    "C:\\Users\\JamesA\\source\\repos\\GetProgrammingWithFSharp\\GetProgrammingWithFSharp.fsproj": {
+    "C:\\Users\\JamesA\\Source\\Repos\\GetProgrammingWithFSharp\\GetProgrammingWithFSharp.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\JamesA\\source\\repos\\GetProgrammingWithFSharp\\GetProgrammingWithFSharp.fsproj",
+        "projectUniqueName": "C:\\Users\\JamesA\\Source\\Repos\\GetProgrammingWithFSharp\\GetProgrammingWithFSharp.fsproj",
         "projectName": "GetProgrammingWithFSharp",
-        "projectPath": "C:\\Users\\JamesA\\source\\repos\\GetProgrammingWithFSharp\\GetProgrammingWithFSharp.fsproj",
+        "projectPath": "C:\\Users\\JamesA\\Source\\Repos\\GetProgrammingWithFSharp\\GetProgrammingWithFSharp.fsproj",
         "packagesPath": "C:\\Users\\JamesA\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\JamesA\\source\\repos\\GetProgrammingWithFSharp\\obj\\",
+        "outputPath": "C:\\Users\\JamesA\\Source\\Repos\\GetProgrammingWithFSharp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\JamesA\\AppData\\Roaming\\NuGet\\NuGet.Config",
