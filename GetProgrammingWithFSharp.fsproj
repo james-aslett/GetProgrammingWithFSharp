@@ -6,11 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Program.fs" />
+    <Folder Include="Concepts\" />
+    <Folder Include="Units\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Concepts\" />
+    <Compile Include="Lessons\L4_SayingALittleDoingALot.fs" />
+    <None Include="scratchpad.fsx" />
   </ItemGroup>
 
 </Project>
