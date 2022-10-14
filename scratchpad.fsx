@@ -13,3 +13,9 @@ let myWords = countWords "Apple Pear Plum Peach"
 //the number of words in a string by using standard .NET string split and array functionality. You'll need to provide a type hint for the input argument, such as
 //let countWords (text:string) =...
 //Then, save the string and number of words to disk as a plain-text file.
+
+//Lesson 4 4.1
+let car = "Skoda"
+let random = System.Random()
+let randomNumber = random.Next()
+
