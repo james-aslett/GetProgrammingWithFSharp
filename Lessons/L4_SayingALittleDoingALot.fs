@@ -55,4 +55,44 @@ let doStuffWithTwoNumbers(first, second) =
 //No accessibility modifier - in F#, public is the default for top-level values. There are several reasons for this, but it makes perfect sense in F#, because with nested scopes (described in detail in the following section), you can hide values effectively without resorting to accessibility modifiers
 //No static modifier - again, static is the default way of working in F#. This is different from what you’re used to, but it fits with how you’ll design most solutions in F#
 
-//BOOKMARK page 53 Accessibility modifiers in F#
+//Accessibility modifiers in F#
+//It's worth pointing out that although F# supports most modifiers, there's no protected access modifier. This isn't usually a problem; I've certainly never needed 'protected' since I started using F#. This is probably because protected is a modifier used when working with object-oriented hierarchies - something you rarely use in F#.
+
+//Nested scopes
+//We're used to using classes and methods as a means of scoping and data hiding. You might have a class that contains private fields and methods, as well as one or many public methods. You can also use methods for data hiding - again, the data is visible only within the context of that function call. In F#, you can define arbitrary scopes at any point you want. Let's assume you want to estimate someone's age by using the current year, as shown in the following listing:
+let year = DateTime.Now.Year
+let theAge = year - 1979
+let estimatedAge = sprintf "You are about %d years old!" theAge
+// rest of application…
+
+//Looking at this code, the only thing you're interested in is the string value estimatedAge. The other lines are used as part of the calculation of that; they're not used anywhere else in your application. But currently, they're at the top level of the code, so anything afterward that uses estimatedAge can also see those two values. Why is this a problem? First, because it's something more for you as a developer to reason about - where is the year value being used? Is any other code somehow depending on it? Second (and again, this is slightly less of an issue in F#, where values are immutable by default), values that have large scopes tend to negatively impact a code base in terms of bugs and/or code smells. In F#, you can eliminate this by nesting those values inside the scope of estimatedAge as far as possible, as the next listing shows.
+
+let estimatedAgeNested =                       //top-level scope
+    let age =                                  //nested scope
+        let year = DateTime.Now.Year           //value of year only visible within scope of age value
+        year - 1979
+    sprintf "You are about %d years old!" age  //can't access year value
+
+//Now it's clear that age is used only by the estimatedAge value. Similarly, DateTime.Now.Year is used only when calculating age. You can't access any value outside the scope that it was defined in, so you can think of each of these nested scopes as being mini classes if you like - scopes for storing data that's used to generate a value.
+
+//Nested functions
+//If you've been paying attention, you'll remember that F# treats functions as values. This means that you can also create functions within other functions! Here’s an example of how to do this in F#:
+
+let estimateAges(familyName, year1, year2, year3) = //top-level function
+    let calculateAge yearOfBirth =                  //nested function
+        let year = System.DateTime.Now.Year
+        year - yearOfBirth
+    let estimatedAge1 = calculateAge year1          //calling the nested functon
+    let estimatedAge2 = calculateAge year2
+    let estimatedAge3 = calculateAge year3
+    let averageAge = (estimatedAge1 + estimatedAge2 + estimatedAge3) / 3
+    sprintf "Average age for family %s is %d" familyName averageAge
+
+//You declare a function called estimateAges, which itself defines a nested helper function called calculateAge inside it. The estimateAges function then calls calculateAge three times in order to generate an average age estimate for the three ages that were supplied. The ability to create nested functions means that you can start to think of functions and classes that have a single public method as interchangeable.
+
+//Capturing values in F#
+//Within the body of a nested function (or any nested value), code can access any values defined in its containing (parent) scope without you having to explicitly supply them as arguments to the nested function. You can think of this as similar to a lambda function in C# 'capturing' a value declared in its parents' scope. When you return such a code block, this is known as a closure; it's common to do this in F# - without even realizing it.
+
+//Cyclical dependencies in F#
+//This is one of the best 'prescriptive' features of F# that many developers coming from C# and VB are shocked by: F# doesn’t (easily) permit cyclical dependencies. In F#, the order in which types are defined matters. Type A can’t reference Type B if Type A is declared before Type B, and the same applies to values. Even more surprising is that this applies to all the files in a project - so file order in a project matters! Files at the bottom of the project can access types and values defined above them, but not the other way around. You can manually move files up and down in VS by selecting the file and pressing Alt-up arrow or Alt-down arrow (or right-clicking a file and choosing the appropriate option). As it turns out, though, this 'restriction' turns into a feature. By forcing you to avoid cyclic dependencies, the design of your solutions will naturally become easier to reason about, because all dependencies will always face 'upward'.
+

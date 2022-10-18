@@ -3,15 +3,16 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+	<UseWPF>true</UseWPF>
+	<UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Concepts\" />
-    <Folder Include="Units\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Compile Include="Units\U2_helloFSharp.fs" />
+    <Compile Include="Lessons\L3_repl.fs" />
     <Compile Include="Lessons\L4_SayingALittleDoingALot.fs" />
+    <Compile Include="Concepts\printfn.fs" />
+    <None Include="Listings\LI4_8_CreatingAFormToDisplayAWebPage.fsx" />
     <None Include="scratchpad.fsx" />
   </ItemGroup>
 

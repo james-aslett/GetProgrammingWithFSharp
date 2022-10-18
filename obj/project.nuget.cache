@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "QC6SGA768/L00+r/QLRVGI0Iihm4+42Yve/yc0kWbl4G0qgYHhWLxnnkVpJm1hWzmwinrjK62x7NI0R9bPthYA==",
+  "dgSpecHash": "yN8kdBV0lS5RUDk71VRPQ+iG7bXrKMZ876uRKYbkI30EspMEwqz0KKRdm3UgwPJfJH6rcZE9l7nJe+6t1cQyww==",
   "success": true,
   "projectFilePath": "C:\\Users\\JamesA\\source\\repos\\GetProgrammingWithFSharp\\GetProgrammingWithFSharp.fsproj",
   "expectedPackageFiles": [
-    "C:\\Users\\JamesA\\.nuget\\packages\\fsharp.core\\6.0.5\\fsharp.core.6.0.5.nupkg.sha512"
+    "C:\\Users\\JamesA\\.nuget\\packages\\fsharp.core\\6.0.6\\fsharp.core.6.0.6.nupkg.sha512"
   ],
   "logs": []
 }
