@@ -8,7 +8,7 @@
 //Exploring a new NuGet package that you've heard about in a lightweight exploratory mode
 //Performing rapid data analysis and exploration - think of tools such as SQL Server Management Studio
 
-//The emphasis is on quick exploration cycles: trying out ideas in a low-cost manner and getting rapid feedback, before pushing that into the application code base. What's nice about F# is that because the language allows you to encode more business rules into the code than in C#, you can often have a great deal of confidence that your code will work. You won’t need to run end-to-ends particularly often. Instead, you’ll find yourself working in Visual Studio and the REPL more and more, focusing on writing code that delivers business value. C# has a basic REPL called C# Interactive.
+//The emphasis is on quick exploration cycles: trying out ideas in a low-cost manner and getting rapid feedback, before pushing that into the application code base. What's nice about F# is that because the language allows you to encode more business rules into the code than in C#, you can often have a great deal of confidence that your code will work. You won't need to run end-to-ends particularly often. Instead, you'll find yourself working in Visual Studio and the REPL more and more, focusing on writing code that delivers business value. C# has a basic REPL called C# Interactive.
 
 //F# Interactive (FSI)
 
@@ -31,20 +31,20 @@
 
 //You probably noticed the 'val it = text' in FSI for commands that you executed. What's this? 'it' is the default value that any expressions are bound to if you don't explicitly supply one by using the 'let' keyword. Executing this command: System.DateTime.UtcNow;; is the same as executing this: let it = System.DateTime.UtcNow;;
 
-//If you’ve tried the preceding exercises, your first thought is probably something like, 'Well, this is quite useful, but the IDE support is awful!' and you’re not far wrong. You get no syntax highlighting, no IntelliSense support - no nothing, really. A couple of experimental extensions are available to improve this, but at the moment working directly in FSI isn’t a great experience.
+//If you've tried the preceding exercises, your first thought is probably something like, 'Well, this is quite useful, but the IDE support is awful!' and you're not far wrong. You get no syntax highlighting, no IntelliSense support - no nothing, really. A couple of experimental extensions are available to improve this, but at the moment working directly in FSI isn't a great experience.
 
-//Luckily, there’s a much better way to work with FSI that does give you IntelliSense and syntax highlighting: F# scripts, or .fsx files. Let’s see how to create your first script and experiment with it a little.
+//Luckily, there's a much better way to work with FSI that does give you IntelliSense and syntax highlighting: F# scripts, or .fsx files. Let's see how to create your first script and experiment with it a little.
 
 //Add an .fsx file to your project. Entering any text here will give you full IntelliSense and code completion, just like inside a full .fs file.
 
-//In this way, you can work with all .NET types and values within a script file for experimentation. Even better, scripts can work together with FSI to give you a fantastic experience, as you’ll see next. And the best bit is that a script doesn’t need a solution or project in which to function. You can open Visual Studio, choose File > New, pick an F# script, and start working!
+//In this way, you can work with all .NET types and values within a script file for experimentation. Even better, scripts can work together with FSI to give you a fantastic experience, as you'll see next. And the best bit is that a script doesn't need a solution or project in which to function. You can open Visual Studio, choose File > New, pick an F# script, and start working!
 
 //Understanding the relationship between scripts and FSI
 
-//When working with scripts, you’ll obviously want a way to evaluate the results of code you’ve entered. This is extremely easy within an F# script: pressing Alt-Enter sends the current line to FSI for evaluation. In this way, you can think of the rapid feedback cycle here as similar to writing unit tests (particularly in a TDD style), albeit in a much more lightweight form. You can also highlight multiple lines and use the same keypress to send all the highlighted code to FSI.
+//When working with scripts, you'll obviously want a way to evaluate the results of code you've entered. This is extremely easy within an F# script: pressing Alt-Enter sends the current line to FSI for evaluation. In this way, you can think of the rapid feedback cycle here as similar to writing unit tests (particularly in a TDD style), albeit in a much more lightweight form. You can also highlight multiple lines and use the same keypress to send all the highlighted code to FSI.
 
 //Working with functions in scripts
 
-//You can also define functions in scripts, send them to FSI, and then call them from the script on demand. The next listing creates a function that takes in someone’s name and returns a string that’s the greeting of the person:
+//You can also define functions in scripts, send them to FSI, and then call them from the script on demand. The next listing creates a function that takes in someone's name and returns a string that's the greeting of the person:
 let greetPerson name age = sprintf "Hello, %s. You are %d years old" name age
 let greeting = greetPerson "Fred" 25

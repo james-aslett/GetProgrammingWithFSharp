@@ -12,9 +12,12 @@
     <Compile Include="Lessons\L3_repl.fs" />
     <Compile Include="Lessons\L4_SayingALittleDoingALot.fs" />
     <Compile Include="Lessons\L5_TrustingTheCompiler.fs" />
+    <Compile Include="Lessons\L6_WorkingWithImmutableData.fs" />
     <Compile Include="Concepts\printfn.fs" />
     <None Include="Listings\LI5_6_TypeInference.fsx" />
     <None Include="Listings\LI4_8_CreatingAFormToDisplayAWebPage.fsx" />
+    <None Include="Listings\LI5_10_ComplexTypeInference.fsx" />
+    <None Include="Listings\LI5_6_1_CreatingImmutableValues.fsx" />
     <None Include="scratchpad.fsx" />
   </ItemGroup>
 

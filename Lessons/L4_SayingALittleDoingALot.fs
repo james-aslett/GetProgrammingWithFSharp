@@ -12,13 +12,13 @@ let website = System.Uri "http://fsharp.org" //binding a URI to the symbol websi
 let add (first, second) = first + second //binding a function that adds two numbers together to the symbol add
 
 //Takeaways from this sample:
-//No types - you'll notice that we haven't bothered with specifying any types. The F# compiler will figure these out for you, so if you mouse over age or website, you'll see int and System.Uri (although you can - and occasionally must - specify them). This type inference is scattered throughout the language, and is so fundamental to how we work in F# that lesson 5 is entirely dedicated to it (and will explain how the compiler understands that the add function takes in two numbers - it’s not magic!)
+//No types - you'll notice that we haven't bothered with specifying any types. The F# compiler will figure these out for you, so if you mouse over age or website, you'll see int and System.Uri (although you can - and occasionally must - specify them). This type inference is scattered throughout the language, and is so fundamental to how we work in F# that lesson 5 is entirely dedicated to it (and will explain how the compiler understands that the add function takes in two numbers - it's not magic!)
 //No 'new' keyword - in F#, the new keyword is optional, and generally not used except when constructing objects that implement IDisposable. Instead, F# views a constructor as a function, like any other 'normal' function that you might define
 //No semicolons - in F#, they're optional; the newline is enough for the compiler to figure out you've finished an expression. You can use semicolons, but they're completely unnecessary (unless you want to include multiple expressions on a single line). Generally, you can forget they ever existed
 //No brackets for function arguments - you might have already seen this and asked why this is. F# has two ways to define function arguments, known as tupled form and curried form. We'll deal with this distinction in a later lesson, but for now it's fine to say that both when calling and defining them, functions that take a single argument don't need round brackets, although you can put them in if you like; functions that take in zero or multiple arguments (as per the add function) need them, as well as commas to separate the arguments, just like C#
 
 //Let isn't var!
-//Don’t confuse let with var. Unlike var, which declares variables that can be modified later, let binds an immutable value to a symbol. The closest thing in C# would be to declare every variable with the readonly keyword (although this isn’t entirely equivalent). It’s better to think of let bindings as copy-and-paste directives; wherever you see the symbol, replace it with the value that was originally assigned during the declaration. You may have noticed that you can execute the same let binding multiple times in FSI. This is because F# allows you to repurpose a symbol multiple times within the same scope. This is known as shadowing, and is shown in the following listing:
+//Don't confuse let with var. Unlike var, which declares variables that can be modified later, let binds an immutable value to a symbol. The closest thing in C# would be to declare every variable with the readonly keyword (although this isn't entirely equivalent). It's better to think of let bindings as copy-and-paste directives; wherever you see the symbol, replace it with the value that was originally assigned during the declaration. You may have noticed that you can execute the same let binding multiple times in FSI. This is because F# allows you to repurpose a symbol multiple times within the same scope. This is known as shadowing, and is shown in the following listing:
 let foo() =
     let x = 10 //binds 10 to the symbol x
     printfn "%d" (x + 20) //prints 30 to the console
@@ -29,7 +29,7 @@ let foo() =
 //Shadowing is a more advanced (and somewhat controversial) feature, so don't worry too much abnout it. But this is why you can declare the same symbol multiple times wthin FSI.
 
 //Scoping values
-//I’m sure you’ve heard that global variables are a bad thing! Scoping of values is important in any language; scoping allows us not only to show intent by explaining where and when a value is of use within a program, but also to protect us from bugs by reducing the possibilities for a value to be used within an application. In C#, we use { } to explicitly mark scope, as shown in the next listing:
+//I'm sure you've heard that global variables are a bad thing! Scoping of values is important in any language; scoping allows us not only to show intent by explaining where and when a value is of use within a program, but also to protect us from bugs by reducing the possibilities for a value to be used within an application. In C#, we use { } to explicitly mark scope, as shown in the next listing:
 //using System
 //public static int DoStuffWithTwoNumbers(int first, int second)
 //{
@@ -39,7 +39,7 @@ let foo() =
 // return doubled;
 //}
 
-//In this context, the variable added is only in scope within the context of the curly braces. Outside of that, it's out of scope and not accessible by the rest of the program. On the other hand, F# is a whitespace-significant language: rather than using curly braces, you have to indent code to tell the compiler that you’re in a nested scope.
+//In this context, the variable added is only in scope within the context of the curly braces. Outside of that, it's out of scope and not accessible by the rest of the program. On the other hand, F# is a whitespace-significant language: rather than using curly braces, you have to indent code to tell the compiler that you're in a nested scope.
 
 //Scoping in F#
 let doStuffWithTwoNumbers(first, second) =
@@ -51,9 +51,9 @@ let doStuffWithTwoNumbers(first, second) =
 //There's no specific restriction on the number of spaces to indent. You can indent 1 space or 10 spaces - as long as you're consistent within the scope! Most people use four spaces. It's not worth wasting time on picking the indent size, so I advise you to go with that to start with.
 
 //You'll notice a few more things from this multiline function:
-//No return keyword - the return keyword is unnecessary and not valid F# syntax (except in one case, which you’ll see that in the second half of this book). Instead, F# assumes that the final expression of a scope is the result of that scope. In this case it's the value of doubled
+//No return keyword - the return keyword is unnecessary and not valid F# syntax (except in one case, which you'll see that in the second half of this book). Instead, F# assumes that the final expression of a scope is the result of that scope. In this case it's the value of doubled
 //No accessibility modifier - in F#, public is the default for top-level values. There are several reasons for this, but it makes perfect sense in F#, because with nested scopes (described in detail in the following section), you can hide values effectively without resorting to accessibility modifiers
-//No static modifier - again, static is the default way of working in F#. This is different from what you’re used to, but it fits with how you’ll design most solutions in F#
+//No static modifier - again, static is the default way of working in F#. This is different from what you're used to, but it fits with how you'll design most solutions in F#
 
 //Accessibility modifiers in F#
 //It's worth pointing out that although F# supports most modifiers, there's no protected access modifier. This isn't usually a problem; I've certainly never needed 'protected' since I started using F#. This is probably because protected is a modifier used when working with object-oriented hierarchies - something you rarely use in F#.
@@ -76,7 +76,7 @@ let estimatedAgeNested =                       //top-level scope
 //Now it's clear that age is used only by the estimatedAge value. Similarly, DateTime.Now.Year is used only when calculating age. You can't access any value outside the scope that it was defined in, so you can think of each of these nested scopes as being mini classes if you like - scopes for storing data that's used to generate a value.
 
 //Nested functions
-//If you've been paying attention, you'll remember that F# treats functions as values. This means that you can also create functions within other functions! Here’s an example of how to do this in F#:
+//If you've been paying attention, you'll remember that F# treats functions as values. This means that you can also create functions within other functions! Here's an example of how to do this in F#:
 
 let estimateAges(familyName, year1, year2, year3) = //top-level function
     let calculateAge yearOfBirth =                  //nested function
@@ -94,5 +94,5 @@ let estimateAges(familyName, year1, year2, year3) = //top-level function
 //Within the body of a nested function (or any nested value), code can access any values defined in its containing (parent) scope without you having to explicitly supply them as arguments to the nested function. You can think of this as similar to a lambda function in C# 'capturing' a value declared in its parents' scope. When you return such a code block, this is known as a closure; it's common to do this in F# - without even realizing it.
 
 //Cyclical dependencies in F#
-//This is one of the best 'prescriptive' features of F# that many developers coming from C# and VB are shocked by: F# doesn’t (easily) permit cyclical dependencies. In F#, the order in which types are defined matters. Type A can’t reference Type B if Type A is declared before Type B, and the same applies to values. Even more surprising is that this applies to all the files in a project - so file order in a project matters! Files at the bottom of the project can access types and values defined above them, but not the other way around. You can manually move files up and down in VS by selecting the file and pressing Alt-up arrow or Alt-down arrow (or right-clicking a file and choosing the appropriate option). As it turns out, though, this 'restriction' turns into a feature. By forcing you to avoid cyclic dependencies, the design of your solutions will naturally become easier to reason about, because all dependencies will always face 'upward'.
+//This is one of the best 'prescriptive' features of F# that many developers coming from C# and VB are shocked by: F# doesn't (easily) permit cyclical dependencies. In F#, the order in which types are defined matters. Type A can't reference Type B if Type A is declared before Type B, and the same applies to values. Even more surprising is that this applies to all the files in a project - so file order in a project matters! Files at the bottom of the project can access types and values defined above them, but not the other way around. You can manually move files up and down in VS by selecting the file and pressing Alt-up arrow or Alt-down arrow (or right-clicking a file and choosing the appropriate option). As it turns out, though, this 'restriction' turns into a feature. By forcing you to avoid cyclic dependencies, the design of your solutions will naturally become easier to reason about, because all dependencies will always face 'upward'.
 
