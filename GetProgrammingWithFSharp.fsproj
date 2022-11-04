@@ -8,16 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Units\U2_helloFSharp.fs" />
-    <Compile Include="Lessons\L3_repl.fs" />
-    <Compile Include="Lessons\L4_SayingALittleDoingALot.fs" />
-    <Compile Include="Lessons\L5_TrustingTheCompiler.fs" />
-    <Compile Include="Lessons\L6_WorkingWithImmutableData.fs" />
+    <Compile Include="Unit Overviews\Unit2_Overview.fs" />
+    <Compile Include="Lessons\Lesson3_Repl.fs" />
+    <Compile Include="Lessons\Lesson5_TrustingTheCompiler.fs" />
+    <Compile Include="Lessons\Lesson6_WorkingWithImmutableData.fs" />
+    <Compile Include="Lessons\Lesson4_SayingALittleDoingALot.fs" />
+    <None Include="Listings\Listing5_6_TypeInference.fsx" />
+    <None Include="Listings\Listing5_10_ComplexTypeInference.fsx" />
+    <None Include="Listings\Listing5_6_1_CreatingImmutableValues.fsx" />
+    <Compile Include="Listings\Listing6_4_WorkingWithMutableObjects.fs" />
+    <None Include="Listings\Listing4_8_CreatingAFormToDisplayAWebPage.fsx" />
     <Compile Include="Concepts\printfn.fs" />
-    <None Include="Listings\LI5_6_TypeInference.fsx" />
-    <None Include="Listings\LI4_8_CreatingAFormToDisplayAWebPage.fsx" />
-    <None Include="Listings\LI5_10_ComplexTypeInference.fsx" />
-    <None Include="Listings\LI5_6_1_CreatingImmutableValues.fsx" />
     <None Include="scratchpad.fsx" />
   </ItemGroup>
 

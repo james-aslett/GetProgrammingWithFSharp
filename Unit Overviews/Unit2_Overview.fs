@@ -1,6 +1,4 @@
-﻿module helloFSharp
-
-//In the previous unit, you gained a feeling for the development experience in VS. It's not that different from C# and VB .NET insofar as you have the same basic project types, as well as access to the Base Class Library (BCL) that you already know. But we covered only the bare essentials of the F# language.
+﻿//In the previous unit, you gained a feeling for the development experience in VS. It's not that different from C# and VB .NET insofar as you have the same basic project types, as well as access to the Base Class Library (BCL) that you already know. But we covered only the bare essentials of the F# language.
 
 //This unit focuses on the core foundational elements of F# as a language: how it differs from C# and VB .NET in its aims, how it changes your approach to problem solving in the 'small', and how you learn to work with a compiler and language that make you think in a slightly different way. As you'll see, you'll already be familiar with some of the concepts in C# and VB .NET; but F# takes those features and turns the dial up to 11 on them - putting them front and center of the language.
 
