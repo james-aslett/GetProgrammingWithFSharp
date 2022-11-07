@@ -9,15 +9,10 @@
 
   <ItemGroup>
     <Compile Include="Unit Overviews\Unit2_Overview.fs" />
-    <Compile Include="Lessons\Lesson3_Repl.fs" />
-    <Compile Include="Lessons\Lesson5_TrustingTheCompiler.fs" />
-    <Compile Include="Lessons\Lesson6_WorkingWithImmutableData.fs" />
-    <Compile Include="Lessons\Lesson4_SayingALittleDoingALot.fs" />
-    <None Include="Listings\Listing5_6_TypeInference.fsx" />
-    <None Include="Listings\Listing5_10_ComplexTypeInference.fsx" />
-    <None Include="Listings\Listing5_6_1_CreatingImmutableValues.fsx" />
-    <Compile Include="Listings\Listing6_4_WorkingWithMutableObjects.fs" />
-    <None Include="Listings\Listing4_8_CreatingAFormToDisplayAWebPage.fsx" />
+    <None Include="Lessons\Lesson-03_Repl.fsx" />
+    <None Include="Lessons\Lesson-04_SayingALittleDoingALot.fsx" />
+    <None Include="Lessons\Lesson-05_TrustingTheCompiler.fsx" />
+    <None Include="Lessons\Lesson-06_WorkingWithImmutableData.fsx" />
     <Compile Include="Concepts\printfn.fs" />
     <None Include="scratchpad.fsx" />
   </ItemGroup>

@@ -1,12 +1,10 @@
-﻿module sayingALittleDoingALot
-
-open System
+﻿open System
 
 //In F#, the overall emphasis is to enable you to solve complex problems with simple code. You want to focus on solving the problem at hand without necessarily having to first think about design patterns within which you can put your code, or complex syntax. All the features you're going to see now are geared toward helping to achieve that. F# does have some common 'design-patternish' features, but in my experience, they're few and far between, with less emphasis on them.
 
 //The `let` keyword is the single most important keyword in the F# language. You use it to bind values to symbols. In the context of F#, a value can range from a simple value type such as an integer or a Plan Old C# Object (POCO), to a complex value such as an object with fields and methods or even a function. In C#, we're not generally used to treating functions as value, but in F#, they're the same - so any value can be bound to a symbol with 'let'.
 
-//Sample let bindings:
+//Listing 4.1 Sample let bindings
 let age = 35 //binding 25 to the symbol age
 let website = System.Uri "http://fsharp.org" //binding a URI to the symbol website
 let add (first, second) = first + second //binding a function that adds two numbers together to the symbol add
@@ -19,6 +17,8 @@ let add (first, second) = first + second //binding a function that adds two numb
 
 //Let isn't var!
 //Don't confuse let with var. Unlike var, which declares variables that can be modified later, let binds an immutable value to a symbol. The closest thing in C# would be to declare every variable with the readonly keyword (although this isn't entirely equivalent). It's better to think of let bindings as copy-and-paste directives; wherever you see the symbol, replace it with the value that was originally assigned during the declaration. You may have noticed that you can execute the same let binding multiple times in FSI. This is because F# allows you to repurpose a symbol multiple times within the same scope. This is known as shadowing, and is shown in the following listing:
+
+//Listing 4.2 Reusing let bindings
 let foo() =
     let x = 10 //binds 10 to the symbol x
     printfn "%d" (x + 20) //prints 30 to the console
@@ -30,6 +30,8 @@ let foo() =
 
 //Scoping values
 //I'm sure you've heard that global variables are a bad thing! Scoping of values is important in any language; scoping allows us not only to show intent by explaining where and when a value is of use within a program, but also to protect us from bugs by reducing the possibilities for a value to be used within an application. In C#, we use { } to explicitly mark scope, as shown in the next listing:
+
+//Listing 4.3 Scoping in C#
 //using System
 //public static int DoStuffWithTwoNumbers(int first, int second)
 //{
@@ -41,7 +43,7 @@ let foo() =
 
 //In this context, the variable added is only in scope within the context of the curly braces. Outside of that, it's out of scope and not accessible by the rest of the program. On the other hand, F# is a whitespace-significant language: rather than using curly braces, you have to indent code to tell the compiler that you're in a nested scope.
 
-//Scoping in F#
+//Listing 4.4 Scoping in F#
 let doStuffWithTwoNumbers(first, second) =
     let added = first + second //creation of scope for the doStuffWithTwoNumbers function
     Console.WriteLine("{0} + {1} = {2}", first, second, added)
@@ -60,14 +62,17 @@ let doStuffWithTwoNumbers(first, second) =
 
 //Nested scopes
 //We're used to using classes and methods as a means of scoping and data hiding. You might have a class that contains private fields and methods, as well as one or many public methods. You can also use methods for data hiding - again, the data is visible only within the context of that function call. In F#, you can define arbitrary scopes at any point you want. Let's assume you want to estimate someone's age by using the current year, as shown in the following listing:
+
+//Listing 4.5 Unmanaged scope
 let year = DateTime.Now.Year
 let theAge = year - 1979
-let estimatedAge = sprintf "You are about %d years old!" theAge
+let theEstimatedAge = sprintf "You are about %d years old!" theAge
 // rest of application…
 
 //Looking at this code, the only thing you're interested in is the string value estimatedAge. The other lines are used as part of the calculation of that; they're not used anywhere else in your application. But currently, they're at the top level of the code, so anything afterward that uses estimatedAge can also see those two values. Why is this a problem? First, because it's something more for you as a developer to reason about - where is the year value being used? Is any other code somehow depending on it? Second (and again, this is slightly less of an issue in F#, where values are immutable by default), values that have large scopes tend to negatively impact a code base in terms of bugs and/or code smells. In F#, you can eliminate this by nesting those values inside the scope of estimatedAge as far as possible, as the next listing shows.
 
-let estimatedAgeNested =                       //top-level scope
+//Listing 4.6 Tightly bound scope
+let estimatedAge =                       //top-level scope
     let age =                                  //nested scope
         let year = DateTime.Now.Year           //value of year only visible within scope of age value
         year - 1979
@@ -78,6 +83,7 @@ let estimatedAgeNested =                       //top-level scope
 //Nested functions
 //If you've been paying attention, you'll remember that F# treats functions as values. This means that you can also create functions within other functions! Here's an example of how to do this in F#:
 
+//Listing 4.7 Nested (inner) functions
 let estimateAges(familyName, year1, year2, year3) = //top-level function
     let calculateAge yearOfBirth =                  //nested function
         let year = System.DateTime.Now.Year

@@ -1,17 +1,17 @@
-﻿module trustTheCompiler
-
-//Type inference as we know it
+﻿//Type inference as we know it
 //Let's refamiliarize ourselves with the C# var keyword based on the official MSDN documentation:
 //Variables that are declared at method scope can have an implicit type var. An implicitly typed local variable is strongly typed just as if you had declared the type yourself, but the compiler determines the type.
 
 //Type inference in C# in detail
 //Here's a simple example of that description in action.
+
+//Listing 5.1 Using var in C#
 var i = 10; //implicitly typed
 int i = 10; //explicitly typed
 
 //The right-hand side of the = can be just about any expression, so you can write more complicated code that may defer to another method, perhaps in another class. Naturally, you need to give a little bit of thought regarding the naming of variables when using var!
 
-//Variable naming with type inference
+//Listing 5.2 Variable naming with type inference
 var i = customer.Withdraw(50); //Implicitly typed. Withdraw() returns an int, so i is inferred to be an int.
 var newBalance = customer.Withdraw(50); //Use of intelligent naming to explain intent to the reader
 
@@ -26,6 +26,8 @@ number.ToLower(); // 'int' does not contain a definition for 'ToLower'
 
 //Practical benefits of type inference
 //Even in its restricted form in C#, type inference can be a nice feature. The most obvious benefit is that of readability: you can focus on getting results from method calls and use the human-readable name of the value to gain its meaning, rather than the type. This is especially useful with generics, and F# uses generics a lot. But you gain another subtler benefit: the ease of refactoring. Imagine you have a method Save() that stores data in the database and returns an integer value. Let's assume that this is the number of rows saved. You then call it in your main code:
+
+//Listing 5.3 Depending on method results with explicit typing
 int result = Save(); //explicit binding to int
 if (result == 0) //where the value is explicitly used as an int
  Console.WriteLine("Failure!");
@@ -43,6 +45,8 @@ else
 
  //Imagining a more powerful type-inference system
  //Unfortunately, type inference in C# and VB .NET is restricted to the single use case I've illustrated. Let's look at a slightly larger code snippet:
+
+ //Listing 5.4 Hypothetical type inference in C#
  public static var CloseAccount(var balance, var customer)
 {
     if (balance < 0) //balance compared with 0
@@ -68,7 +72,7 @@ else
 
 //F# uses a sophisticated algorithm that relies on the Hindley–Milner (HM) type system. It's not especially important to know what that is, although feel free to read up on it in your own time! What is important to know is that HM type systems do impose some restrictions in order to operate that might surprise you, as we'll see shortly. Without further ado, let's finally get onto some F#! Thus far, all the examples you've seen in F# haven't used type annotations, but now I'll show you a simple example that we can break down piece by piece so you can understand how it works.
 
-//Explicit type annotations in F#
+////Listing 5.5 Explicit type annotations in F#
 let add (a:int, b:int) : int =
     let answer:int = a + b
     answer
@@ -85,7 +89,7 @@ let add (a:int, b:int) : int =
 
 //Start by removing just the return type from the type signature of the function; when you compile this function in FSI, you'll see that the type signature is exactly the same as before.
 
-//Omitting the return type from a function in F#
+//Listing 5.6 Omitting the return type from a function in F#
 let add (a:int, b:int) =
     let answer:int = a + b
     answer
@@ -107,7 +111,7 @@ let add (a, b) =
 //Working with the BCL
 //First, type inference works best with types native to F#. By this, I mean basic types such as ints, or F# types that you define yourself. We haven't looked at F# types yet, so this won't mean much to you, but if you try to work with a type from a C# library (and this includes the .NET BCL), type inference won't work quite as well - although often a single annotation will suffice within a code base.
 
-//Type inference when working with BCL types in F#
+//Listing 5.7 Type inference when working with BCL types in F#
 let getLength name = sprintf "Name is %d letters." name.Length //doesn't compile - type annotation is required
 let getLength (name:string) = sprintf "Name is %d letters." name.Length //compiles
 let foo(name) = "Hello! " + getLength(name) //compiles - 'name' argument is inferred to be string, based on the call to getLength()
@@ -120,7 +124,7 @@ let foo(name) = "Hello! " + getLength(name) //compiles - 'name' argument is infe
 //Type-inferred generics
 //F# can apply type inference not just on simple values but also for type arguments. You can either use an underscore (_) to specify a placeholder for the generic type argument, or omit the argument completely.
 
-//Inferred type arguments in F#
+//Listing 5.8 Inferred type arguments in F#
 open System.Collections.Generic
 let numbers = List<_>() //creating a generic List, but omitting the type argument 
 numbers.Add(10)
@@ -132,7 +136,7 @@ otherNumbers.Add(20)
 
 //You should understand that F# infers the type based on the first available usage of the type argument. The call to numbers.Add(10) is used to tell the compiler that List is of type int. If you were to call numbers.Add with 10 and then "Hello", you'd get a compiler error on the second call, as by this stage the compiler has selected int as the type argument. F# also automatically makes functions generic when needed. Let's look at a simple function that adds items to a list. In this example, no type is specified for the output value anywhere in the code, so the compiler can't infer the type of List. In this case, it will make the entire createList() function generic!
 
-//Automatic generalization of a function
+//Listing 5.9 Automatic generalization of a function
 let createList(first, second) =
     let output = List()
     output.Add(first)
@@ -145,7 +149,7 @@ let createList(first, second) =
 //Following the breadcrumbs
 //Because type inference escapes function scope in F#, unlike in C#, the compiler will go through your entire code base and notify you where the types eventually clash. This is normally a good thing, but it does mean that occasionally you'll need to remember how the type inference system works in order to diagnose compiler errors. Let's look at a relatively simple example that shows how making changes to types can lead to errors occurring in unusual places.
 
-//Complex type-inference example
+//Listing 5.10 Complex type-inference example
 let sayHello(someValue) = //function declaration
     let innerFunction(number) = //innerFunction - signature is int -> string
         if number > 10 then "Isaac"
@@ -156,5 +160,29 @@ let sayHello(someValue) = //function declaration
         else innerFunction(15)
     "Hello " + resultOfInner //String result of overall function
 let result = sayHello(10.5) //Sample call site
+
+//Rather than this line showing an error, you'll see errors in three other places! Why? This is what I refer to as following the breadcrumbs: you need to track through at least one of the errors and see the inferred types to understand why this has happened. Let's look into the first error and try to work out why it's occurring: this expression was expected to have type string , but here it has type int. Remember to mouse over the values and functions to get IntelliSense of the type signatures being inferred!
+
+//1 Looking at the compiler error message, you can see that the call site to innerFunction now expects a string, although you know that it should be an int.
+//2 Now look at the function signature of innerFunction. It used to be int -> string, but now is string -> string (given a string, it returns a string).
+//3 Look at the function body. You can see that the first branch of the if/then code compares number against a string rather than an int. The compiler has used this to infer that the function should take in a string.
+//4 You can prove this by hovering over the number value, which sure enough is now inferred to be a string.
+//5 To help you, and to guide the compiler, let's temporarily explicitly type-annotate the function:
+
+let sayHello2(someValue) =
+    let innerFunction(number:int) =
+        if number > "hello" then "Isaac"
+        elif number > 20 then "Fred"
+        else "Sara"
+    let resultOfInner =
+        if someValue < 10.0 then innerFunction(5)
+        else innerFunction(15)
+    "Hello " + resultOfInner
+let result = sayHello(10.5)
+
+//6 You'll see that the 'false' compiler errors disappear, and the compiler now correctly identifies the error as being "hello", which should be an int.
+//7 After you correct the error, you can remove the type annotation again.
+
+//From this example, you can see that adding in type annotations can sometimes be useful, particularly when trying to narrow down an error caused by clashing types. I recommend, however, that you in general try to avoid working with explicit types everywhere. Your code will look much cleaner as a result.
 
 //If you follow the flow, you''ll notice that the current logic suggests that the Fred branch will never be called. Don't worry about that; we're more interested in the type system and F#'s inference engine here.

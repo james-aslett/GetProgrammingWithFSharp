@@ -1,6 +1,4 @@
-﻿module repl
-
-//REPL (Read Evaluate Print Loop) - a mechanism for you to enter arbitrary, ad hoc code into a standalone environment and get immediate feedback. The easiest way to think of a REPL is to think of the Immediate window in Visual Studio, but rather than being used when running an application, a REPL is used when developing an application. You send code to the REPL, and it evaluates the code and then prints the result. This feedback loop is a tremendously productive away to develop.
+﻿//REPL (Read Evaluate Print Loop) - a mechanism for you to enter arbitrary, ad hoc code into a standalone environment and get immediate feedback. The easiest way to think of a REPL is to think of the Immediate window in Visual Studio, but rather than being used when running an application, a REPL is used when developing an application. You send code to the REPL, and it evaluates the code and then prints the result. This feedback loop is a tremendously productive away to develop.
 
 //A REPL can be an affective replacement for all three of the use cases outlined previously. Here are some example uses:
 //Writing new business logic that you want to add to your application
@@ -22,8 +20,10 @@
 
 //State in FSI
 //FSI maintains state across each command, and you can bind the value of a particular expression to a value by using the let keyword that you can then access in subsequent calls:
-//input: let currentTime = System.DateTime.UtcNow;;
-//input: currentTime.TimeOfDay.ToString();;
+
+//Listing 3.1 A simple let binding
+let currentTime = System.DateTime.UtcNow;;
+currentTime.TimeOfDay.ToString();;
 
 //Note the two semicolons(;;) at the end of each command. This tells FSI to execute the text currently in the buffer. Without this, FSI will add that command to the buffer until it encounters ;; and will execute all the commands that are in the buffer.
 
@@ -46,5 +46,7 @@
 //Working with functions in scripts
 
 //You can also define functions in scripts, send them to FSI, and then call them from the script on demand. The next listing creates a function that takes in someone's name and returns a string that's the greeting of the person:
+
+//Listing 3.2 A simple function definition
 let greetPerson name age = sprintf "Hello, %s. You are %d years old" name age
 let greeting = greetPerson "Fred" 25
